@@ -68,7 +68,7 @@ public class TicketMachineTest {
                assertEquals("Rend mal la monnaie", 30, machine.refund());
         }
         
-        @Test
+        @Test 
         //S8 refund() remet la balance à zéro
         public void refundResetOk() {
                machine.insertMoney(30);
@@ -76,24 +76,15 @@ public class TicketMachineTest {
                assertEquals("Balance non mis à zéro par refund", 0, machine.getBalance());
         }
         
-        @Test
+        @Test(expected=IllegalArgumentException.class)
         //S9 on ne peut pas insérer un montant négatif
         public void insertMonyeMustBePositive() {
-                try {
                     machine.insertMoney(-10);
-                } catch(IllegalArgumentException e) {
-                    throw e;
-                }
         }
         
-        @Test
+        @Test(expected=IllegalArgumentException.class)
         //S10 On ne peut pas créer de machine qui délivre des tickets dont le prix est négatif
         public void machineBuildOk() {
-            try {
-                TicketMachine machineError = new TicketMachine(-10);
-            } catch(IllegalArgumentException e) {
-                throw e;
-            }
-            
+                TicketMachine machineError = new TicketMachine(-10);         
         }
 }
